@@ -1,0 +1,311 @@
+:root {
+    --bg-color: #0f172a;
+    --container-bg: rgba(30, 41, 59, 0.7);
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --accent-color: #3b82f6;
+    --accent-hover: #2563eb;
+    --success-color: #10b981;
+    --danger-color: #ef4444;
+    --border-color: rgba(255, 255, 255, 0.1);
+
+     /* Fluid spacing and typography tokens */
+    --container-padding: clamp(1rem, 5vw, 2rem);
+    --header-font-size: clamp(1.8rem, 8vw, 2.5rem);
+    --task-font-size: clamp(0.95rem, 2.5vw, 1rem);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex;
+    padding: var(--container-padding);
+}
+
+.app-container {
+    background: var(--container-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    width: 100%;
+    max-width: 100%;
+    padding: var(--container-padding);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    background: linear-gradient(to right, #60a5fa, #a78bfa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+header p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.input-section {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+    align-items: center;
+}
+
+#taskInput {
+    flex: 1;
+    min-width: 0;
+    height: 50px;
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 0px 18px;
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-family: inherit;
+    transition: all 0.3s ease;
+    width: 100%;
+    
+    
+}
+
+#taskInput:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+}
+
+#addTaskBtn {
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+#addTaskBtn:hover {
+    background: var(--accent-hover);
+    transform: scale(1.05);
+}
+
+#addTaskBtn:active {
+    transform: scale(0.95);
+}
+
+.filters {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    background: rgba(15, 23, 42, 0.4);
+    padding: 6px;
+    border-radius: 12px;
+}
+
+.filter-btn {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    padding: 12px 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.filter-btn:hover {
+    color: var(--text-primary);
+}
+
+.filter-btn.active {
+    background: var(--accent-color);
+    color: white;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.task-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.task-item {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: fadeIn 0.4s ease forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.task-item:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.3);
+}
+
+.task-item.completed {
+    opacity: 0.6;
+}
+
+.task-item.completed .task-text {
+    text-decoration: line-through;
+    color: var(--text-secondary);
+}
+
+.task-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.task-item.completed .task-content {
+    cursor: default;
+}
+
+.task-text {
+    font-size: 1rem;
+    word-break: break-word;
+    transition: color 0.3s ease;
+}
+
+.task-actions {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.complete-text-btn, .delete-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+    min-height: 44px;
+    
+}
+
+.complete-text-btn {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--success-color);
+    border-color: rgba(16, 185, 129, 0.2);
+}
+
+.complete-text-btn:hover {
+    background: rgba(16, 185, 129, 0.2);
+}
+
+
+
+.delete-btn {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--danger-color);
+    border-color: rgba(239, 68, 68, 0.2);
+}
+
+.delete-btn:hover {
+    background: rgba(239, 68, 68, 0.2);
+}
+
+@media (max-width: 480px) {
+    .complete-text-btn, .delete-btn {
+        padding: 8px;
+        font-size: 0;
+    }
+    .complete-text-btn i, .delete-btn i {
+        font-size: 1rem;
+        margin: 0;
+    }
+}
+
+@media (max-width: 360px) {
+    .input-section {
+        flex-direction: column;
+    }
+    #addTaskBtn {
+        width: 100%;
+    }
+    
+}
+
+/* Tablet Breakpoint (481px to 768px) */
+@media (min-width: 481px) {
+    .app-container {
+        max-width: 600px;
+        margin-top: 40px; /* Space from top */
+    }
+}
+
+/* Desktop Breakpoint (Above 768px) */
+@media (min-width: 769px) {
+    .app-container {
+        max-width: 480px; /* Keep it centered and focused */
+        margin-top: 60px;
+    }
+    
+    body {
+        align-items: center; /* Center vertically on large screens */
+    }
+}
+
+
+.empty-state {
+    text-align: center;
+    padding: 32px 0;
+    color: var(--text-secondary);
+}
+
+.empty-state i {
+    font-size: 3rem;
+    margin-bottom: 16px;
+    opacity: 0.5;
+}
